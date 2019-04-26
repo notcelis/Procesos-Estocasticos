@@ -3,17 +3,26 @@
     <head>
         <title>Hola mundo</title>
         <link rel="stylesheet" type="text/css" href="CSS/Lectura.css"/>
+        <script type="text/javascript" src="JavaScript/jquery-3.3.1.min.js"></script>
         <script type="text/javascript" src="JavaScript/CrearTabla.js"></script>
-        <script src="JavaScript/jquery-3.3.1.min.js"></script>
+        <script type="text/javascript" src="JavaScript/GenerarCombinaciones.js"></script>
     </head>
     <body>
-        <p>Filas:</p>
-        <input type="number" min="1" max="10" value="3"> <br>
-        <p>Columnas:</p>
-        <input type="number" min="1" max="10" value="3"> <br>
-        <div>
-            <table class="lectura"></table>
-        </div>
+        <p>Estados:</p>
+        <input type="number" min="1" max="10" value="3">
+        <br>
+        <p>Decisiones:</p>
+        <input type="number" min="1" max="10" value="3">
+        <br>
+        <p>Probabilidades:</p>
+        <table class="lectura" name="probabilidades"></table>
+        <br>
+        <p>Costos:</p>
+        <table class="lectura" name="costos"></table>
+        <br>
+        <button>Clickeame</button>
+        <p>Politicas:</p>
+        <table class="politicas"></table>
+        <br>
     </body>
-    <script>CrearTabla();</script>
 </html>
