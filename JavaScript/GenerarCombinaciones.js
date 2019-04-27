@@ -18,6 +18,10 @@ function GenerarPoliticas(i, n, m, a){
         return;
     }
     for(var j = 0; j < m; j++){
+        costosTd = $('table.lectura[name="costos"]').children().eq(i).children().eq(j);
+        if(costosTd.children().eq(0).val() == ''){
+            continue;
+        }
         a[i] = j;
         GenerarPoliticas(i + 1, n, m, a);
     }
