@@ -15,9 +15,10 @@ $(document).ready(function(){
 function CrearMTablas(n, m) {
     var nombres = ['probabilidades', 'costos']
     var htmlProbCosto = '<table>';
-    for(var j = 1; j <= m; j++){
+    for(var j = 0; j < m; j++){
         htmlProbCosto += '<tr><table>';
-        htmlProbCosto += '<td><p>' + j + '</p></td>';
+        num = j + 1;
+        htmlProbCosto += '<td><p>' + num + '</p></td>';
         for(var k = 0; k < 2; k++){
             htmlProbCosto +=
               '<td>'
@@ -38,6 +39,6 @@ function CrearMTablas(n, m) {
 // (int, int)
 // Genera el codigo HTML para tener una tabla de NxM
 function TablaNM(n, m){
-    htmlRow = '<tr>' + '<th><input type="number"></th>'.repeat(m) + '</tr>';
+    htmlRow = '<tr>' + '<td><input type="number"></td>'.repeat(m) + '</tr>';
     return htmlRow.repeat(n);
 }
