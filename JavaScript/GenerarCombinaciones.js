@@ -1,16 +1,15 @@
-$(document).ready(function(){
-  $('button[name="politicas"]').on('click', function(){
-    var n = parseInt($('input').eq(0).val());
-    var m = parseInt($('input').eq(1).val());
-    var arr = new Array(n);
-
-    CrearTablaPoliticas(m);
-    for(var k = 0; k < m; k++){
-      $('table.politicas').eq(k).html('');
-      GenerarPoliticas(0, n, m, arr, k);
-    }
-  });
-});
+// Mostrar las politicas cuando se seleccione la opcion
+function GenerarCombinaciones(n, m){
+  $('div[name="procedimiento"]').append('<div name="politicas"></div>');
+  CrearTablaPoliticas(m);
+  var arr = new Array(n);
+  for(var k = 0; k < m; k++){
+    $('table.politicas').eq(k).html('');
+    GenerarPoliticas(0, n, m, arr, k);
+  }
+  // Funcion
+  // Esconder seccion si no hay ninguna politica
+}
 
 function CrearTablaPoliticas(m) {
   htmlTablaPoliticas = '<p>Politicas:</p>';

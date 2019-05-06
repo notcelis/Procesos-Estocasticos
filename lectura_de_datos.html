@@ -6,7 +6,10 @@
   <script type="text/javascript" src="JavaScript/jquery-3.3.1.min.js"></script>
   <script type="text/javascript" src="JavaScript/CrearTabla.js"></script>
   <script type="text/javascript" src="JavaScript/GenerarCombinaciones.js"></script>
-  <script type="text/javascript" src="JavaScript/GenerarProcedimiento.js"></script>
+  <script type="text/javascript" src="JavaScript/Metodos/SeleccionarMetodo.js"></script>
+  <script type="text/javascript" src="JavaScript/Metodos/Exhaustivo.js"></script>
+  <script type="text/javascript" src="JavaScript/Metodos/Mejoramiento.js"></script>
+  <script type="text/javascript" src="JavaScript/Metodos/Descuento.js"></script>
 </head>
 <body>
   <table>
@@ -31,19 +34,15 @@
   <div name="TablasProbabilidadesCostos">
   </div>
 
-  <select>
+  <select name="metodo">
     <option>Exhaustivas</option>
     <option>Iterativo</option>
     <option>Descuentos</option>
   </select>
-  <button name="politicas">Clickeame</button>
 
-  <div name="politicas"></div>
+  <button name="SeleccionarMetodo">Clickeame</button>
 
-  <div name="procedimiento">
-    <img src="img/estadoEstable.PNG">
-    <img src="img/mejoramiento.PNG">
-    <img src="img/descuento.PNG">
+  <div name="procedimiento">    
   </div>
 </body>
 </html>
