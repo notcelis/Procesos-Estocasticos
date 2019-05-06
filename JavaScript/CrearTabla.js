@@ -1,8 +1,8 @@
 // Cada vez que se modifique el tamaño de la tabla
 // ésta se acopla a los argumentos
 $(document).ready(function(){
-    var n = 3;
-    var m = 3;
+    var n = $('input[name="n"]').val();
+    var m = $('input[name="m"]').val();
     CrearMTablas(n, m);
     $('input').on('click', function(){
         n = $('input[name="n"]').val();

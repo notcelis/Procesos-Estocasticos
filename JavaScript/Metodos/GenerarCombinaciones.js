@@ -7,8 +7,9 @@ function GenerarCombinaciones(n, m){
     $('table.politicas').eq(k).html('');
     GenerarPoliticas(0, n, m, arr, k);
   }
-  // Funcion
-  // Esconder seccion si no hay ninguna politica
+  if(!TieneElementos()){
+    $('div[name="politicas"]').remove();
+  }
 }
 
 function CrearTablaPoliticas(m) {
@@ -49,4 +50,14 @@ function GenerarPoliticaTr(arr){
     htmlRow += '<td>' + num + '</td>';
   }
   return htmlRow + '</tr>';
+}
+
+function TieneElementos(){
+  tablasPoliticas = $('table.politicas');
+  for(var i = 0; i < tablasPoliticas.length; i++){
+	   if(tablasPoliticas.eq(i).children().length > 0){
+       return true;
+     }
+  }
+  return false;
 }

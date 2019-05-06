@@ -1,7 +1,7 @@
 function Exhaustivo(n){
   $('div[name="politicas"]').on('click', 'table.politicas tr', function(){
     // Reiniciar
-    $('div[name="politicas"]').nextAll().remove()
+    $('div[name="politicas"]').nextAll().remove();
     // Mostrar la politica seleccionada
     $('div[name="procedimiento"]').append($(this).clone());
     // Generar la tabla de probabilidades y costos
@@ -13,9 +13,9 @@ function Exhaustivo(n){
       for(var j = 0; j < n; j++){
         htmlTablaProbabilidades += '<td>';
         htmlTablaProbabilidades +=
-        tablaProb.eq(indexTable).
-        find('tr').eq(i).
-        find('input').eq(j)
+        tablaProb.eq(indexTable)
+        .find('tr').eq(i)
+        .find('input').eq(j)
         .val();
         htmlTablaProbabilidades += '</td>';
       }
