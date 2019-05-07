@@ -5,9 +5,8 @@ $(document).ready(function(){
     $('div[name="procedimiento"]').html('');
     var n = parseInt($('input').eq(0).val());
     var m = parseInt($('input').eq(1).val());
-    if(seleccion == 0){
-      GenerarCombinaciones(n, m);
-      Exhaustivo(n);
+    if(seleccion == 0){      
+      Exhaustivo(n, m);
     }
     else if(seleccion == 1){
       Mejoramiento();
