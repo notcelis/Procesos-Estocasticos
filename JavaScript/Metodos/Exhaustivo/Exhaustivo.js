@@ -1,5 +1,6 @@
 function Exhaustivo(n, m){
   GenerarCombinaciones(n, m);
+  // Resalta la politica optima
   $('td.valor').eq(BuscarMayor()).parent().css("background-color", "yellow");
   $('div[name="politicas"]').on('click', 'table.politicas tr', function(){
     // Reiniciar

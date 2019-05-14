@@ -3,10 +3,8 @@ function GenerarCombinaciones(n, m){
   $('div[name="procedimiento"]').append('<div name="politicas"></div>');
   CrearTablaPoliticas(m);
   var arr = new Array(n);
-  for(var k = 0; k < m; k++){
-    $('table.politicas').eq(k).html('');
-    GenerarPoliticas(0, n, m, arr, k);
-  }
+  $('table.politicas').html('');
+  GenerarPoliticas(0, n, m, arr);
   if(!TieneElementos()){
     $('div[name="politicas"]').remove();
   }
@@ -14,34 +12,24 @@ function GenerarCombinaciones(n, m){
 
 function CrearTablaPoliticas(m) {
   htmlTablaPoliticas = '<p>Politicas:</p>';
-  htmlTablaPoliticas += '<table><tr>';
-  for(var it = 0; it < m; it++){
-    num = it + 1;
-    htmlTablaPoliticas += '<td>' + num + '</td>';
-  }
-  htmlTablaPoliticas += '</tr><tr>';
-  for(var it = 0; it < m; it++){
-    htmlTablaPoliticas += '<td><table class="politicas"></table></td>';
-  }
-  htmlTablaPoliticas += '</tr></table>';
+  htmlTablaPoliticas += '<table class="politicas"></table>';
   $('div[name="politicas"]').html(htmlTablaPoliticas);
 }
 
-function GenerarPoliticas(i, n, m, arr, k){
-  if(i == n) {
+function GenerarPoliticas(position, n, m, arr){
+  if(position == n) {
     var valorPoliticaCompleto = ValorPoliticaCompleto(n, m, arr);
-    $('table.politicas').eq(k).append(GenerarPoliticaTr(arr, valorPoliticaCompleto));
+    $('table.politicas').append(GenerarPoliticaTr(arr, valorPoliticaCompleto));
     return;
   }
   for(var j = 0; j < m; j++){
-    costosTd = $('[name="costos"]').eq(k)
-               .find('tr').eq(i);
-    costosTd = costosTd.children().eq(j);
-    if(costosTd.children(':first').val() == ''){
+    costosTd = $('[name="costos"]').eq(position)
+               .find('tr').eq(j).find('input');
+    if(ElementoNulo(costosTd)){
       continue;
     }
-    arr[i] = j;
-    GenerarPoliticas(i + 1, n, m, arr, k);
+    arr[position] = j;
+    GenerarPoliticas(position + 1, n, m, arr);
   }
 }
 
@@ -55,6 +43,15 @@ function GenerarPoliticaTr(arr, valor){
   return htmlRow + '</tr>';
 }
 
+function ElementoNulo(td){
+  for(var i = 0; i < td.length; i++){
+    if(td.eq(i).val() == ''){
+      return true;
+    }
+  }
+  return false;
+}
+
 function ArrayPlusInt(arr, c){
   for(var i = 0; i < arr.length; i++){
     arr[i] += c;
@@ -63,9 +60,9 @@ function ArrayPlusInt(arr, c){
 }
 
 function TieneElementos(){
-  tablasPoliticas = $('table.politicas');
-  for(var i = 0; i < tablasPoliticas.length; i++){
-	   if(tablasPoliticas.eq(i).children().length > 0){
+  tablaPolitica = $('table.politicas');
+  for(var i = 0; i < tablaPolitica.length; i++){
+	   if(tablaPolitica.children().length > 0){
        return true;
      }
   }

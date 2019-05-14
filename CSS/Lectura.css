@@ -12,3 +12,7 @@ td.valor
 {
   background: rgb(200, 300, 200);
 }
+
+input {
+  width: 50px;
+}
