@@ -47,7 +47,8 @@ function TablaPoliticas(n, m, poli, nombre, imprimir){
     var indexTable = poli[i];
     arr.push(new Array());
     htmlTabla += '<tr>';
-    for(var j = 0; j < n; j++){
+    var limit = (nombre == 'probabilidades' ? n : m);
+    for(var j = 0; j < limit; j++){
       number =
       tablaPolitica.eq(indexTable)
       .find('tr').eq(i)
@@ -129,6 +130,8 @@ function GaussJordan(arr){
 function ValorPolitica(poli, prob, cost){
   var val = 0.0;
   for(var i = 0; i < prob.length; i++){
+    // error
+    // cuando n < m
     val += cost[i][poli[i]] * prob[i];
   }
   return val;
@@ -143,14 +146,14 @@ function ValorPoliticaCompleto(n, m, poli){
 }
 
 function BuscarMayor(){
-  index = -1;
-  val = -10000;
+  var index = -1;
+  var val = -10000;
   for(var i = 0; i < $('td.valor').length; i++){
-    num = parseInt($('td.valor').eq(i).html());
+    var num = parseFloat($('td.valor').eq(i).html());
   	if(val < num){
   		index = i;
   		val = num;
     }
   }
-  return index
+  return index;
 }

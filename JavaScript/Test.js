@@ -47,6 +47,24 @@ function test_3(){
   tablasCosto.eq(2).find('input').eq(8).val(''); // Tercer fila
 }
 
+function test_4(){
+  n = 2;
+  m = 4;
+  prob = [
+    [.1, .1, .2, .6],
+    [.2, .3, .3, .2],
+    [.2, .1, .3, .4],
+    [.1, .2, .3, .4]
+  ];
+  cost = [
+    [1, 2, 3, 4],
+    [5, 6, 7, 8],
+    [9, 10, 11, 12],
+    [13, 14, 15, 16]
+  ];
+  Entrada(n, m, prob, cost);
+}
+
 function Entrada(n, m, prob, cost){
   $('input[name="n"]').val(n);
   $('input[name="m"]').val(m);
