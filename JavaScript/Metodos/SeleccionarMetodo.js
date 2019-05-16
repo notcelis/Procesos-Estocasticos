@@ -12,7 +12,7 @@ $(document).ready(function(){
       Mejoramiento(n, m);
     }
     else{
-      Descuento();
+      Descuento(n, m);
     }
   });
 });

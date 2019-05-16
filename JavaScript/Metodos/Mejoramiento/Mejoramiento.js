@@ -10,10 +10,10 @@ function Mejoramiento(n, m){
     $('div[name="procedimiento"]').append('<p>Iteracion ' + iter++ + '</p>');
     $('div[name="procedimiento"]').append(ArrHtmlTable(politica));
     $('div[name="procedimiento"]').append('<img src="img/mejoramiento.PNG">');
-    var valoresV = ValoresV(n, politica);
+    var valoresV = ValoresVMejoramiento(n, politica);
     $('div[name="procedimiento"]').append(ArrHtmlTable(valoresV));
     $('div[name="procedimiento"]').append('<img src="img/mejoramientoOptimo.PNG">');
-    valoresV = SumaV(n, m, valoresV, 1.0);
+    valoresV = SumaVMejoramiento(n, m, valoresV);
     $('div[name="procedimiento"]').append(ArrHtmlTable(valoresV));
     var sigPolitica = SiguientePolitica(valoresV);
     if(IgualArr(politica, sigPolitica)){
@@ -41,24 +41,25 @@ function PrimerPoliticaValida(){
 
 function PrimerPolitica(){
   var arr = [];
-  var politica = $('div[name="primerPolitica"]').find('input');
+  var politica = $('div[name="primerPolitica"] table.lectura').find('input');
   for(var i = 0; i < politica.length; i++){
     arr.push(parseInt(politica.eq(i).val()));
   }
   return arr;
 }
 
-function ValoresV(n, politica){
+function ValoresVMejoramiento(n, politica){
   var arr = [];
   for(var i = 0; i < n; i++){
     var k = politica[i] - 1;
-    var tablaProb = $('table.lectura[name="probabilidades"]').eq(k);
+    var tablaProb = $('table.lectura[name="probabilidades"]').eq(k).find('tr').eq(i).find('input');
+    var tablaCost = $('table.lectura[name="costos"]').eq(k).find('tr').eq(i).find('input');
     arr.push(new Array());
     arr[i].push(1);
     for(var j = 0; j < n - 1; j++){
-      arr[i].push(-tablaProb.find('tr').eq(i).find('input').eq(j).val());
+      arr[i].push(-tablaProb.eq(j).val());
     }
-    arr[i].push(parseFloat(tablaProb.find('tr').eq(i).find('input').eq(k).val()));
+    arr[i].push(parseFloat(tablaCost.eq(k).val()));
   }
   for(var i = 1; i < n; i++){
     arr[i - 1][i] += 1;
@@ -68,7 +69,7 @@ function ValoresV(n, politica){
   return arr;
 }
 
-function SumaV(n, m, valoresV, alpha){
+function SumaVMejoramiento(n, m, valoresV){
   var arr = [];
   var probabilidades = $('table.lectura[name="probabilidades"]');
   var costos = $('table.lectura[name="costos"]');
@@ -82,7 +83,7 @@ function SumaV(n, m, valoresV, alpha){
       }
       var fila = probabilidades.eq(k).find('tr').eq(i).find('input');
       for(var j = 0; j < valoresV.length; j++){
-        suma += parseFloat(fila.eq(j).val()) * valoresV[j] * alpha;
+        suma += parseFloat(fila.eq(j).val()) * valoresV[j];
       }
       if(i < valoresV.length){
         suma -= valoresV[i];
