@@ -26,8 +26,8 @@ function CrearMTablas(n, m) {
             + '</td>'
             + '<td>'
             + '<table class="lectura" name="' + nombres[k] + '">'
-            //+ (k == 0 ? TablaNM(n, n) : TablaNM(n, m))
-            + TablaNM(n, n)
+            + (k == 0 ? TablaNM(n, n) : TablaNM(n, m))
+            //+ TablaNM(n, n)
             + '</table>'
             + '</td>';
         }

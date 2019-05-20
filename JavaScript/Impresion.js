@@ -1,7 +1,7 @@
 function ArrHtmlTable(arr){
   var n = arr.length;
   var m = arr[0].length;
-  if(m == undefined){
+  if(m == undefined || m == 1){
     m = n;
     n = 1;
   }

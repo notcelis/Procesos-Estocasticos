@@ -3,30 +3,34 @@ function Exhaustivo(n, m){
   // Resalta la politica optima
   $('td.valor').eq(BuscarMayor()).parent().css("background-color", "yellow");
   $('div[name="politicas"]').on('click', 'table.politicas tr', function(){
-    // Reiniciar
-    $('div[name="politicas"]').nextAll().remove();
-    // Mostrar politica seleccionada
-    $('div[name="procedimiento"]').append($(this).clone());
-    var poli = TrToArray($(this));
-    poli.pop();
-    for(var i = 0; i < poli.length; i++){
-      poli[i] -= 1;
-    }
-    // Mostrar matrices de probabilidades y costos con la politica seleccionada
-    var prob = TablaPoliticas(n, m, poli, 'probabilidades', true);
-    var cost = TablaPoliticas(n, m, poli, 'costos', true);
-    // Mostrar formulas para sacar los valores de PI
-    $('div[name="procedimiento"]').append('<img src="img/estadoEstable.PNG">');
-    $('div[name="procedimiento"]').append('<img src="img/estadoEstableUnidad.PNG">');
-    // Resolver valores de PI
-    prob = MatrizDespejada(MatrizTranspuesta(prob));
-    prob = GaussJordan(MatrizCompleta(prob));
-    $('div[name="procedimiento"]').append(ArrHtmlTable(prob));
-    // Mostrar formula para obtener valor de la politica
-    $('div[name="procedimiento"]').append('<img src="img/valor.PNG">');
-    // Obtener valor de la politica
-    $('div[name="procedimiento"]').append('<p>' + ValorPolitica(poli, prob, cost) + '</p>');
+    MetodoExhaustivo(n, m, $(this));
   });
+}
+
+function MetodoExhaustivo(n, m, elemTr){
+  // Reiniciar
+  $('div[name="politicas"]').nextAll().remove();
+  // Mostrar politica seleccionada
+  $('div[name="procedimiento"]').append(elemTr.clone());
+  var poli = TrToArray(elemTr);
+  poli.pop();
+  for(var i = 0; i < poli.length; i++){
+    poli[i] -= 1;
+  }
+  // Mostrar matrices de probabilidades y costos con la politica seleccionada
+  var prob = TablaPoliticas(n, m, poli, 'probabilidades', true);
+  var cost = TablaPoliticas(n, m, poli, 'costos', true);
+  // Mostrar formulas para sacar los valores de PI
+  $('div[name="procedimiento"]').append('<img src="img/estadoEstable.PNG">');
+  $('div[name="procedimiento"]').append('<img src="img/estadoEstableUnidad.PNG">');
+  // Resolver valores de PI
+  prob = MatrizDespejada(MatrizTranspuesta(prob));
+  prob = GaussJordan(MatrizCompleta(prob));
+  $('div[name="procedimiento"]').append(ArrHtmlTable(prob));
+  // Mostrar formula para obtener valor de la politica
+  $('div[name="procedimiento"]').append('<img src="img/valor.PNG">');
+  // Obtener valor de la politica
+  $('div[name="procedimiento"]').append('<p>' + ValorPolitica(poli, prob, cost) + '</p>');
 }
 
 function TrToArray(htmlTr){
@@ -47,7 +51,8 @@ function TablaPoliticas(n, m, poli, nombre, imprimir){
     var indexTable = poli[i];
     arr.push(new Array());
     htmlTabla += '<tr>';
-    for(var j = 0; j < n; j++){
+    var limit = (nombre == 'probabilidades' ? n : m);
+    for(var j = 0; j < limit; j++){
       number =
       tablaPolitica.eq(indexTable)
       .find('tr').eq(i)
@@ -129,6 +134,8 @@ function GaussJordan(arr){
 function ValorPolitica(poli, prob, cost){
   var val = 0.0;
   for(var i = 0; i < prob.length; i++){
+    // error
+    // cuando n < m
     val += cost[i][poli[i]] * prob[i];
   }
   return val;
@@ -143,14 +150,14 @@ function ValorPoliticaCompleto(n, m, poli){
 }
 
 function BuscarMayor(){
-  index = -1;
-  val = -10000;
+  var index = -1;
+  var val = -10000;
   for(var i = 0; i < $('td.valor').length; i++){
-    num = parseInt($('td.valor').eq(i).html());
+    var num = parseFloat($('td.valor').eq(i).html());
   	if(val < num){
   		index = i;
   		val = num;
     }
   }
-  return index
+  return index;
 }
